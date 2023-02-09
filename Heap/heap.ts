@@ -37,6 +37,15 @@ class Heap {
     }
   }
 
+  poll(): number {
+    const maxValue = this.data[0];
+    this.data[0] = this.data[this.data.length - 1];
+    this.data.length--;
+    this.heapifyDown();
+
+    return maxValue;
+  }
+
   heapifyDown(): void {
     let currIdx = 0;
     while (this.data[this.getLeftChildIndex(currIdx)] !== undefined) {
@@ -58,15 +67,6 @@ class Heap {
       }
     }
   }
-
-  poll(): number {
-    const maxValue = this.data[0];
-    this.data[0] = this.data[this.data.length - 1];
-    this.data.length--;
-    this.heapifyDown();
-
-    return maxValue;
-  }
 }
 
 const heapTest = new Heap();
@@ -77,3 +77,5 @@ heapTest.push(4);
 console.log(heapTest.data);
 console.log(heapTest.poll());
 console.log(heapTest.data);
+
+export default Heap;
